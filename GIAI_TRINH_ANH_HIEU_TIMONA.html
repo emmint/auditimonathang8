@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audit SEO Timona — trình duyệt kế hoạch thi công</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0F3F76; --blue:#2483C5; --ink:#231F20; --paper:#FBFAF7;
+  --red:#A32828; --redbg:#FBEFEF; --green:#1E7A4B; --greenbg:#EDF7F1;
+  --amber:#B26B00; --amberbg:#FDF6E9; --slate:#5C6B7A; --line:#DFE5EC;
+  --wash:#F2F6FA;
+  --sans:'Be Vietnam Pro',-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --mono:'IBM Plex Mono','Courier New',monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+     font-size:16.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 26px}
+
+/* ---------- header ---------- */
+header{background:var(--navy);color:#fff;padding:52px 0 46px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;
+         text-transform:uppercase;color:#9FC4E6;margin:0 0 14px}
+h1{font-size:clamp(30px,5.2vw,50px);font-weight:800;line-height:1.06;margin:0 0 16px;
+   letter-spacing:-.022em;max-width:20ch}
+.sub{font-size:18px;color:#CFE0F0;max-width:64ch;margin:0 0 30px}
+.hdr-facts{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid rgba(255,255,255,.22)}
+.hdr-fact{padding:18px 30px 4px 0;margin-right:30px;border-right:1px solid rgba(255,255,255,.18)}
+.hdr-fact:last-child{border-right:0}
+.hdr-fact b{display:block;font-family:var(--mono);font-size:26px;font-weight:600;
+            color:#fff;line-height:1.1}
+.hdr-fact span{font-size:13px;color:#9FC4E6}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:20;background:var(--paper);
+    border-bottom:1px solid var(--line);padding:0}
+nav .wrap{display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+nav .wrap::-webkit-scrollbar{display:none}
+nav a{flex:none;padding:13px 16px 11px;font-size:13.5px;font-weight:600;color:var(--slate);
+      text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap}
+nav a:hover{color:var(--navy);border-bottom-color:var(--blue)}
+nav a .n{font-family:var(--mono);color:var(--blue);margin-right:6px;font-size:12px}
+
+/* ---------- sections ---------- */
+section{padding:56px 0;border-bottom:1px solid var(--line);scroll-margin-top:46px}
+section:last-of-type{border-bottom:0}
+.qno{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--blue);
+     text-transform:uppercase;margin:0 0 8px;font-weight:600}
+h2.q{font-size:clamp(23px,3.4vw,33px);font-weight:800;line-height:1.16;margin:0 0 14px;
+     letter-spacing:-.018em;max-width:26ch}
+.answer{font-size:18px;line-height:1.6;max-width:74ch;margin:0 0 26px;
+        border-left:3px solid var(--navy);padding-left:18px}
+.answer b{font-weight:600}
+p{max-width:76ch}
+h3{font-size:17px;font-weight:800;margin:32px 0 12px}
+h4{font-size:15px;font-weight:800;margin:24px 0 8px;color:var(--navy)}
+
+/* ---------- numbers row ---------- */
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;
+      background:var(--line);border:1px solid var(--line);margin:0 0 26px}
+.num{background:#fff;padding:18px 18px 16px}
+.num .v{font-family:var(--mono);font-size:27px;font-weight:600;color:var(--navy);
+        line-height:1.05;display:block;letter-spacing:-.02em}
+.num .v.bad{color:var(--red)}
+.num .l{font-size:13.5px;color:var(--slate);margin-top:6px;display:block;line-height:1.4}
+.num .src{font-family:var(--mono);font-size:10.5px;color:#9AA7B4;margin-top:7px;display:block}
+
+/* ---------- table ---------- */
+table{width:100%;border-collapse:collapse;font-size:14.5px;background:#fff;
+      border:1px solid var(--line);margin:0 0 22px}
+th{background:var(--navy);color:#fff;text-align:left;padding:11px 13px;font-weight:600;
+   font-size:12.5px;letter-spacing:.02em;vertical-align:bottom}
+td{padding:11px 13px;border-top:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+td.mono,th.mono{font-family:var(--mono);font-size:13px}
+td.num-c{font-family:var(--mono);text-align:right;white-space:nowrap}
+td.ctr{text-align:center}
+.badge{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 7px;
+       border-radius:2px;font-weight:600;letter-spacing:.03em;white-space:nowrap}
+.b-red{background:var(--redbg);color:var(--red)}
+.b-amber{background:var(--amberbg);color:var(--amber)}
+.b-green{background:var(--greenbg);color:var(--green)}
+.b-blue{background:#E8F0F8;color:var(--navy)}
+.b-grey{background:#EEF1F4;color:var(--slate)}
+
+/* ---------- SIGNATURE: chain ---------- */
+.chain{background:#fff;border:1px solid var(--line);padding:26px 24px 22px;margin:0 0 26px}
+.chain-title{font-family:var(--mono);font-size:12px;letter-spacing:.12em;
+             text-transform:uppercase;color:var(--slate);margin:0 0 20px}
+.links{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.link{flex:1 1 150px;min-width:0;position:relative;padding:0 16px 0 0}
+.link:last-child{padding-right:0}
+.link .bar{height:5px;border-radius:2px;margin-bottom:12px}
+.bar-lock{background:var(--red)}
+.bar-wait{background:#E3E7EC}
+.bar-go{background:var(--green)}
+.link .code{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.06em;
+            display:block;margin-bottom:5px}
+.code.lock{color:var(--red)} .code.wait{color:var(--slate)} .code.go{color:var(--green)}
+.link .nm{font-size:14px;font-weight:600;line-height:1.35;display:block;margin-bottom:5px}
+.link .dt{font-size:12.5px;color:var(--slate);line-height:1.45}
+.chain-note{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);
+            font-size:14px;color:var(--slate);max-width:none}
+
+/* ---------- callouts ---------- */
+.call{border-left:3px solid var(--red);background:var(--redbg);padding:17px 20px;margin:0 0 20px}
+.call.ok{border-color:var(--green);background:var(--greenbg)}
+.call.warn{border-color:var(--amber);background:var(--amberbg)}
+.call.info{border-color:var(--blue);background:var(--wash)}
+.call h4{margin:0 0 7px;font-size:15.5px;font-weight:800;color:var(--ink)}
+.call p{margin:0 0 7px;max-width:78ch}
+.call p:last-child{margin-bottom:0}
+.call ul{margin:7px 0 0;padding-left:20px}
+.call li{margin-bottom:6px;max-width:76ch}
+
+/* ---------- wave list ---------- */
+.wave{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 22px;
+      border-left:2px solid var(--line);padding-left:0;margin:0 0 4px}
+.wave-item{display:contents}
+.w-mark{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+        background:var(--navy);padding:4px 9px;border-radius:2px;height:fit-content;
+        margin:22px 0 0 -16px;letter-spacing:.05em}
+.w-body{padding:20px 0 20px;border-bottom:1px solid var(--line)}
+.wave .wave-item:last-child .w-body{border-bottom:0}
+.w-body h4{margin:0 0 5px;font-size:17px;color:var(--ink)}
+.w-body .meta{font-family:var(--mono);font-size:12px;color:var(--slate);margin:0 0 8px}
+.w-body p{margin:0;font-size:15px}
+
+ul.plain{padding-left:20px;margin:0 0 20px}
+ul.plain li{margin-bottom:8px;max-width:76ch}
+
+/* ---------- link bảng ---------- */
+.sheetbtn{display:inline-flex;align-items:center;gap:11px;text-decoration:none;
+  background:#fff;color:var(--navy);padding:13px 20px;border-radius:2px;
+  font-weight:600;font-size:15px;border:1px solid rgba(255,255,255,.25);
+  transition:transform .12s ease}
+.sheetbtn:hover{transform:translateY(-1px)}
+.sheetbtn .ic{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  background:var(--greenbg);color:var(--green);padding:3px 8px;border-radius:2px}
+.sheetbtn .arw{color:var(--blue);font-weight:800}
+.hdr-link{margin:0 0 30px}
+.hdr-link .cap{display:block;font-size:13px;color:#9FC4E6;margin-top:9px;
+  font-family:var(--mono);letter-spacing:.02em}
+.inline-sheet{display:block;background:var(--wash);border:1px solid var(--line);
+  border-left:3px solid var(--blue);padding:15px 18px;margin:0 0 22px;
+  text-decoration:none;color:var(--ink);max-width:78ch}
+.inline-sheet b{color:var(--navy)}
+.inline-sheet span{display:block;font-size:13.5px;color:var(--slate);margin-top:4px}
+footer{padding:40px 0 80px;color:var(--slate);font-size:14px}
+footer p{max-width:82ch}
+footer .mono{font-family:var(--mono);font-size:12.5px;line-height:1.7}
+
+@media (max-width:760px){
+  .hdr-fact{border-right:0;padding-right:0;margin-right:24px}
+  table{font-size:13px} th,td{padding:9px 9px}
+  .answer{font-size:16.5px}
+  .link{flex:1 1 100%;padding:0 0 16px}
+  .wave{grid-template-columns:1fr}
+  .w-mark{margin:18px 0 0 0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Trình duyệt kế hoạch · timona.edu.vn · 24/08/2026</p>
+    <h1>Audit SEO đã xong. Xin duyệt kế hoạch thi công.</h1>
+    <p class="sub">Quét xong 14/14 bước. Chưa động vào website một dòng nào. Tài liệu này trả lời sáu câu hỏi anh cần biết trước khi cho phép bắt đầu.</p>
+    <p class="hdr-link">
+      <a class="sheetbtn" href="https://docs.google.com/spreadsheets/d/1Ts9-mVNIu_JD7STuSxRxXPN_nEQO0OLS54bmOOpqhsI/edit?gid=203397987#gid=203397987" target="_blank" rel="noopener">
+        <span class="ic">BẢNG</span> Mở bảng theo dõi thi công &mdash; 94 việc <span class="arw">&rarr;</span>
+      </a>
+      <span class="cap">Google Sheets &middot; sheet 01_TONG_QUAN &middot; 94 dòng</span>
+    </p>
+    <div class="hdr-facts">
+      <div class="hdr-fact"><b>95</b><span>phát hiện</span></div>
+      <div class="hdr-fact"><b>94</b><span>việc cần làm</span></div>
+      <div class="hdr-fact"><b>40</b><span>việc thuộc anh Hiếu</span></div>
+      <div class="hdr-fact"><b>4</b><span>chỗ đang chặn</span></div>
+      <div class="hdr-fact"><b>0</b><span>đã triển khai</span></div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#q1"><span class="n">01</span>Tìm ra gì</a>
+    <a href="#q2"><span class="n">02</span>Chia đợt kiểu gì</a>
+    <a href="#q3"><span class="n">03</span>Anh làm gì</a>
+    <a href="#q4"><span class="n">04</span>Anh quyết gì</a>
+    <a href="#q5"><span class="n">05</span>Đo bằng gì</a>
+    <a href="#q6"><span class="n">06</span>Ai mở khoá</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- =================== Q1 =================== -->
+<section id="q1">
+  <p class="qno">Câu 1</p>
+  <h2 class="q">Audit tìm ra gì, nghiêm trọng tới đâu, mất bao nhiêu traffic</h2>
+
+  <p class="answer">Lượt truy cập từ Google đã giảm <b>77%</b> trong 15 tháng. Nhưng phát hiện quan trọng hơn con số đó: <b>audit chưa chứng minh được nguyên nhân chính</b>, vì công cụ đo của Timona đang hỏng. Đó là lý do kế hoạch bắt đầu bằng sửa công cụ đo chứ không bắt đầu bằng sửa website.</p>
+
+  <h3>Traffic mất bao nhiêu</h3>
+  <div class="nums">
+    <div class="num"><span class="v bad">263 → 60</span><span class="l">Lượt nhấp từ Google mỗi ngày, tháng 05/2025 so với 08/2026 — giảm 77%</span><span class="src">Search Console, F-01</span></div>
+    <div class="num"><span class="v bad">8.717 → 4.264</span><span class="l">Lượt hiển thị trên Google mỗi ngày, cùng kỳ — giảm 51%</span><span class="src">Search Console, F-01</span></div>
+    <div class="num"><span class="v bad">9.156 → 1.254</span><span class="l">Phiên truy cập tự nhiên mỗi tháng (08/2026 chưa đủ tháng)</span><span class="src">GA4, F-03</span></div>
+  </div>
+  <p style="margin-top:-6px;font-size:14.5px;color:var(--slate)">Hai nguồn đo độc lập (Google Search Console và Google Analytics) cùng cho một chiều. Dữ liệu không thiếu ngày nào trong 478 ngày. <b>Việc mất traffic là thật, không phải lỗi báo cáo.</b></p>
+
+  <h3>Nhưng đây là hai vụ mất khác nhau, không phải một</h3>
+  <table>
+    <thead><tr><th style="width:22%">Giai đoạn</th><th style="width:20%">Chuyện gì xảy ra</th><th>Đọc thế nào</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>05/2025 → 01/2026</b></td>
+        <td>Thứ hạng <b>tốt lên</b> (17,7 → 7,5)<br>Lượt hiển thị <b>tăng</b> 19%<br>Lượt nhấp <b>giảm</b> 57%</td>
+        <td>Người dùng nhìn thấy Timona nhiều hơn nhưng bấm vào ít hơn. Hai khả năng: Google tự trả lời luôn nên không ai cần bấm, <b>hoặc</b> Timona đang xếp hạng cao cho những từ khoá không liên quan tới nghề làm đẹp. Audit tìm thấy bằng chứng cho khả năng thứ hai: site đang lên top cho <span class="mono">tử vi số chủ đạo 6</span>, <span class="mono">2k7</span>, <span class="mono">tiền lương</span>, <span class="mono">các ngành khối D cho nữ</span>. <b>Chưa tách bạch được hai nguyên nhân.</b></td>
+      </tr>
+      <tr>
+        <td><b>02/2026 → nay</b></td>
+        <td>Lượt hiển thị <b>giảm 59%</b><br>Thứ hạng xấu đi</td>
+        <td>Đây là mất chỗ hiển thị, cơ chế khác hẳn giai đoạn trên. Điểm gãy: tuần 25/01/2026. Đáy rơi vào tuần Tết Bính Ngọ nên có yếu tố mùa vụ — <b>nhưng traffic không hồi về nền cũ sau Tết</b>, nên Tết chỉ giải thích cái đáy, không giải thích mức nền mới.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="call">
+    <h4>Nói thẳng về giới hạn của audit này</h4>
+    <p>Audit <b>chưa</b> trả lời được câu "vì sao mất". Lý do: dữ liệu Search Console hiện tại chỉ là ảnh chụp toàn kỳ, không có chiều thời gian — không tách được tháng nào mất, trang nào mất, từ khoá nào mất. Đó chính là việc đầu tiên trong kế hoạch (đợt 0).</p>
+    <p>Vì vậy, <b>xin đừng hiểu 94 việc này là "làm xong thì lấy lại 77%"</b>. Chúng lấy lại phần đã đo được và đã định lượng. Phần chưa giải thích được cần dữ liệu mới mới truy ra.</p>
+  </div>
+
+  <h3>Phần đã đo được và định lượng chắc chắn</h3>
+  <p>Đây là những chỗ traffic đang rơi mà có thể chỉ tận nơi và tính ra số.</p>
+
+  <table>
+    <thead><tr><th style="width:34%">Vấn đề</th><th class="num-c" style="width:12%">Lượt nhấp</th><th class="num-c" style="width:14%">Lượt hiển thị</th><th>Nghĩa là gì</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>Cụm tiêm filler / botox bị xoá cứng</b><br><span class="badge b-red">Rủi ro pháp lý</span></td>
+        <td class="num-c">844</td><td class="num-c">56.189</td>
+        <td>Gỡ nội dung là <b>đúng</b> — trường nghề không được dạy thủ thuật tiêm. Nhưng cách gỡ sai: dùng "xoá mất trang" thay vì "chuyển hướng sang trang liên quan". 65 đường dẫn đang dẫn vào ngõ cụt. <b>Và 5 đường dẫn trong cụm này hiện vẫn còn công khai trên mạng.</b></td>
+      </tr>
+      <tr>
+        <td><b>22 file tài liệu đang thay trang web ăn khách</b></td>
+        <td class="num-c">495</td><td class="num-c">5.610</td>
+        <td>Một file <span class="mono">.docx</span> mẫu hợp đồng đào tạo nghề spa ăn <b>304 lượt nhấp</b> — nhiều hơn 99% số trang trên site. Người ta tải thẳng file, không qua trang nào: không thấy lời mời đăng ký, không có ô điền thông tin, không đo được. Trong nhóm này còn có kế hoạch tuyển sinh, thông báo học phí, quyết định thành lập hội đồng thẩm định — tài liệu nội bộ đang tải công khai.</td>
+      </tr>
+      <tr>
+        <td><b>Môi trường thử nghiệm lọt lên Google</b></td>
+        <td class="num-c">14</td><td class="num-c">334</td>
+        <td><span class="mono">sandbox.timona.edu.vn</span> là bản chạy thử hệ thống học trực tuyến, đang công khai và <b>cho phép Google vào tự do</b>. Google đang hiển thị cả trang đăng ký và trang quên mật khẩu của môi trường thử.</td>
+      </tr>
+      <tr>
+        <td><b>Bốn cụm nhỏ khác</b><br><span style="font-size:13px;color:var(--slate)">trang thẻ, chuyển hướng chuyên mục hỏng…</span></td>
+        <td class="num-c">212</td><td class="num-c">32.786</td>
+        <td>Tổng cộng với ba dòng trên: <b>568 đường dẫn có traffic thật nhưng không nằm trong bản đồ site khai báo với Google</b> — 1.565 lượt nhấp, 94.919 lượt hiển thị.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Công cụ đo đang hỏng — đây là phát hiện nghiêm trọng nhất</h3>
+  <p>Nghiêm trọng vì nó làm mọi con số kinh doanh hiện tại không dùng được để ra quyết định.</p>
+
+  <div class="nums">
+    <div class="num"><span class="v bad">118.286</span><span class="l">Lượt ghi nhận sự kiện tên <span class="mono">undefined</span> trong GA4 — gần bằng số lượt xem trang. Toàn bộ là rác.</span><span class="src">GA4, F-06a</span></div>
+    <div class="num"><span class="v bad">1.319</span><span class="l">Lượt điền form <b>không</b> được tính là chuyển đổi, vì cùng một hành động đang được đặt 3 tên khác nhau</span><span class="src">GA4, F-06c</span></div>
+    <div class="num"><span class="v bad">898</span><span class="l">Con số chuyển đổi đang báo cáo — không đáng tin. Số thật nằm đâu đó giữa ~900 và ~2.200.</span><span class="src">GA4, F-06</span></div>
+  </div>
+
+  <div class="call warn">
+    <h4>Một cảnh báo cụ thể về báo cáo cũ</h4>
+    <p>Tỷ lệ chuyển đổi có nhảy từ 0,35% (01/2026) lên 2,57% (05/2026). <b>Rất có thể đó là do thêm hoặc đổi thẻ đo, không phải do chất lượng khách tăng.</b> Nếu con số này từng được báo lên như thành tích thì cần đính chính.</p>
+  </div>
+
+  <h3>Ba phát hiện còn lại đáng để anh biết</h3>
+  <ul class="plain">
+    <li><b>Trang bán khoá học gần như không ra lượt nhấp.</b> 24 trang khoá học cộng lại được khoảng 211 lượt nhấp trên khoảng 70.000 lượt hiển thị — tỷ lệ 0,3%. Trang bán khoá nối mi có 9.222 lượt hiển thị mà chỉ 3 lượt nhấp, vì nó đang nằm ở trang 4 kết quả tìm kiếm. Nội dung trang <b>không</b> phải nguyên nhân — audit đã kiểm, trung bình 2.583 từ mỗi trang, đầy đủ.</li>
+    <li><b>Chuyển đổi dồn vào một chỗ.</b> Trang chủ một mình ăn 42,2% tổng số chuyển đổi; năm trang đầu ăn 60,8%. Trong 844 trang có traffic, chỉ 149 trang từng ra được ít nhất một chuyển đổi — 695 trang ra số không. Blog kéo về người tra "nghề nào dễ thất nghiệp", "mẫu hợp đồng spa" — không phải người định đi học.</li>
+    <li><b>Máy đọc của các công cụ AI đang bị tường lửa chặn.</b> Năm con bot AI (trong đó có bot của ChatGPT, Claude, Perplexity) bị máy chủ trả về mã từ chối. Bằng chứng nhân quả rất rõ: hai bot <i>không</i> bị chặn thì ChatGPT gửi về 641 phiên truy cập; ba bot <i>bị</i> chặn thì Perplexity chỉ 53 phiên, Claude 6 phiên. Đây là kênh đang lớn dần và Timona đang tự khoá cửa.</li>
+  </ul>
+</section>
+
+<!-- =================== Q2 =================== -->
+<section id="q2">
+  <p class="qno">Câu 2</p>
+  <h2 class="q">94 việc chia 6 đợt theo logic gì</h2>
+
+  <p class="answer">Không xếp theo "việc nào quan trọng nhất". Xếp theo <b>việc nào phải xong trước thì việc sau mới làm được</b>. Trong mỗi đợt mới xếp theo điểm ưu tiên. Một việc điểm cao nhưng bị việc khác chặn thì bắt buộc nằm sau việc chặn nó — không có ngoại lệ.</p>
+
+  <a class="inline-sheet" href="https://docs.google.com/spreadsheets/d/1Ts9-mVNIu_JD7STuSxRxXPN_nEQO0OLS54bmOOpqhsI/edit?gid=203397987#gid=203397987" target="_blank" rel="noopener">
+    <b>Xem đầy đủ 94 việc &rarr;</b>
+    <span>Bảng theo dõi trên Google Sheets. Mỗi việc có cách làm từng bước, kết quả kỳ vọng kèm con số nền, và cách kiểm chứng sau khi làm xong.</span>
+  </a>
+
+  <div class="wave">
+    <div class="wave-item">
+      <span class="w-mark">ĐỢT 0</span>
+      <div class="w-body">
+        <h4>Mở khoá dữ liệu</h4>
+        <p class="meta">10 việc · Linh 6 · Claude 4 · Anh Hiếu 0</p>
+        <p>Sửa công cụ đo trước khi sửa bất cứ thứ gì. Đợt này <b>không</b> làm tăng traffic — nhưng mọi đánh giá "việc kia có ăn thua không" đều dựa vào nó. Bỏ qua đợt này thì làm 84 việc còn lại xong cũng không chứng minh được gì. Anh Hiếu không có việc nào ở đây.</p>
+      </div>
+    </div>
+    <div class="wave-item">
+      <span class="w-mark">ĐỢT 1</span>
+      <div class="w-body">
+        <h4>Rẻ, chắc, không thể làm hỏng gì</h4>
+        <p class="meta">23 việc · Anh Hiếu 14 · Linh 6 · Claude 3 · chạy song song đợt 0</p>
+        <p>Chi phí thấp nhất, bằng chứng chắc nhất, không có rủi ro. Ví dụ: thẻ khai báo pháp nhân của website đang ghi <span class="mono">linh.seo</span> — tên tài khoản WordPress — trên cả 628 trang. Hoặc: link YouTube ở chân trang trỏ vào một kênh không tồn tại, cũng trên cả 628 trang. Loại việc sửa một chỗ, cả site hưởng.</p>
+      </div>
+    </div>
+    <div class="wave-item">
+      <span class="w-mark">ĐỢT 2</span>
+      <div class="w-body">
+        <h4>Chặn máu chảy</h4>
+        <p class="meta">7 việc · Anh Hiếu 6 · Linh 1</p>
+        <p>Những chỗ <b>đang mất mỗi ngày</b>, để lâu mất thêm. Mở tường lửa cho bot AI, gỡ tài liệu nội bộ khỏi thư mục công khai, chặn môi trường thử nghiệm khỏi Google, và chuyển hướng 65 đường dẫn cụm filler.</p>
+      </div>
+    </div>
+    <div class="wave-item">
+      <span class="w-mark">ĐỢT 3</span>
+      <div class="w-body">
+        <h4>Lấy lại lượt nhấp đã có sẵn</h4>
+        <p class="meta">34 việc — đợt lớn nhất · Claude 22 · Anh Hiếu 7 · Linh 5</p>
+        <p>Traffic đã có rồi, chỉ đang không bấm được thành lượt vào site. Không phải viết bài mới, không phải gộp trang, không rủi ro. Việc tiêu biểu: 38 từ khoá đáy phễu đang có 31.643 lượt hiển thị mà chỉ ra 102 lượt nhấp — tỷ lệ 0,32% trong khi trung bình toàn site là 1,40%.</p>
+      </div>
+    </div>
+    <div class="wave-item">
+      <span class="w-mark">ĐỢT 4</span>
+      <div class="w-body">
+        <h4>Quyết định lớn, rủi ro cao</h4>
+        <p class="meta">13 việc · Anh Hiếu 7 · Linh 6 — xem chi tiết ở câu 4</p>
+        <p>Việc có thể <b>mất traffic vĩnh viễn nếu làm sai</b>, hoặc là quyết định kinh doanh mà số liệu không tự trả lời được. Xếp sau cùng có chủ đích: lúc đó đã có số liệu sạch từ đợt 0 để quyết dựa trên bằng chứng thay vì cảm tính.</p>
+      </div>
+    </div>
+    <div class="wave-item">
+      <span class="w-mark">ĐỢT 5</span>
+      <div class="w-body">
+        <h4>Hạ tầng và tốc độ</h4>
+        <p class="meta">7 việc · Anh Hiếu 6 · Claude 1</p>
+        <p>Đắt nhất, cần làm việc với nhà cung cấp máy chủ, và <b>phải chờ 28 ngày mới thấy kết quả</b> vì Google chỉ cập nhật số đo tốc độ theo chu kỳ đó. Xếp cuối vì kết quả chậm nhất, không phải vì không quan trọng.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="call info">
+    <h4>Ba nguyên tắc chi phối toàn bộ bảng</h4>
+    <ul>
+      <li><b>Không đề xuất xoá hay ẩn bất kỳ trang nào khi chưa biết trang đó có ra khách hay không.</b> Áp dụng cho mọi trang, không phân biệt lớn nhỏ. Một trang trông "lạc chủ đề" vẫn có thể đang ra khách. Bản audit đầu tiên từng gợi ý ẩn một khoá học — gợi ý đó đã bị nguyên tắc này bác.</li>
+      <li><b>Không làm việc sau khi việc chặn nó chưa xong.</b> Điểm ưu tiên cao không có nghĩa được làm trước.</li>
+      <li><b>Không đưa con số nào không truy được về dữ liệu gốc.</b> Có lần đã phải giao bảng thiếu 51 trên 65 dòng vì thiếu dữ liệu, thay vì điền cho đủ.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- =================== Q3 =================== -->
+<section id="q3">
+  <p class="qno">Câu 3</p>
+  <h2 class="q">Anh Hiếu phải làm gì, và tốn bao lâu</h2>
+
+  <p class="answer">Anh gánh <b>40 trên 94 việc — 43% cả bảng</b>. Về thời gian, em phải nói thật: <b>chưa quy đổi ra giờ được.</b> Cột chi phí hiện là thang 1-2-3, do Claude tự chấm, chưa qua người trực tiếp làm. Xin anh cho một con số giờ công thật thì mới lên lịch được.</p>
+
+  <h3>40 việc của anh, chia theo mức chi phí</h3>
+  <table>
+    <thead><tr><th style="width:14%">Mức</th><th class="num-c" style="width:12%">Số việc</th><th style="width:30%">Định nghĩa</th><th>Gồm những gì</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="badge b-green">Mức 1</span></td><td class="num-c"><b>11</b></td>
+        <td>Dưới 1 giờ mỗi việc</td>
+        <td>Sửa thẻ khai báo pháp nhân, sửa link YouTube chân trang, gỡ khai báo bị lặp ở trang chủ, chặn môi trường thử nghiệm, chuyển hướng một đường dẫn trùng.</td>
+      </tr>
+      <tr>
+        <td><span class="badge b-amber">Mức 2</span></td><td class="num-c"><b>20</b></td>
+        <td>Vài giờ đến 1 ngày mỗi việc</td>
+        <td>Gỡ tài liệu nội bộ khỏi thư mục công khai, mở tường lửa cho bot AI, sửa lỗi nhảy bố cục trang danh mục khoá học, thêm header bảo mật, sửa cấu trúc tiêu đề nhiều trang.</td>
+      </tr>
+      <tr>
+        <td><span class="badge b-red">Mức 3</span></td><td class="num-c"><b>9</b></td>
+        <td>Nhiều ngày, hoặc cần chi tiền, hoặc phải qua bên thứ ba</td>
+        <td>Chín việc này là phần đắt nhất — liệt kê đầy đủ ngay dưới đây.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a class="inline-sheet" href="https://docs.google.com/spreadsheets/d/1Ts9-mVNIu_JD7STuSxRxXPN_nEQO0OLS54bmOOpqhsI/edit?gid=203397987#gid=203397987" target="_blank" rel="noopener">
+    <b>Lọc riêng 40 việc của anh Hiếu &rarr;</b>
+    <span>Mở bảng, lọc cột &ldquo;Ai làm&rdquo; theo tên anh. Cột &ldquo;Bị chặn bởi&rdquo; cho biết việc nào chưa bắt đầu được.</span>
+  </a>
+
+  <h4>Chín việc mức 3 của anh Hiếu</h4>
+  <table>
+    <thead><tr><th class="mono" style="width:9%">Mã</th><th style="width:30%">Việc</th><th style="width:11%">Đợt</th><th>Vì sao đắt</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">T-48</td><td>Chuyển hướng 65 đường dẫn cụm filler</td><td><span class="badge b-grey">Đợt 2</span></td><td>65 dòng, mỗi dòng phải đúng đích. Linh duyệt từng dòng trước khi chạy.</td></tr>
+      <tr><td class="mono">T-14</td><td>Gắn khai báo khoá học cho trang khoá học</td><td><span class="badge b-grey">Đợt 3</span></td><td>0/24 trang đang có. Phải làm từng trang, mỗi trang khai từng học phần.</td></tr>
+      <tr><td class="mono">T-73</td><td>Thêm mô tả cho link dạng ảnh</td><td><span class="badge b-grey">Đợt 3</span></td><td>579 trên 2.271 link đang thiếu — 25%.</td></tr>
+      <tr><td class="mono">T-77</td><td>Nội dung riêng cho thị trường kiều bào</td><td><span class="badge b-grey">Đợt 3</span></td><td>1.854 lượt nhấp/năm từ Mỹ, Úc, Nhật, Đài Loan, Campuchia. <b>Độ chắc thấp nhất bảng</b> — nên hoãn cho tới khi có thêm dữ liệu.</td></tr>
+      <tr><td class="mono">T-59</td><td>Gộp và chuyển hướng cụm nối mi</td><td><span class="badge b-amber">Đợt 4</span></td><td><b>Rủi ro mất traffic cao nhất toàn bảng.</b> 10 trang gần trùng nhau.</td></tr>
+      <tr><td class="mono">T-60</td><td>Gộp cụm học spa</td><td><span class="badge b-amber">Đợt 4</span></td><td>18–23 trang tranh nhau. Chọn trang nào làm trang chính là <b>quyết định kinh doanh</b>, số liệu không tự trả lời được.</td></tr>
+      <tr><td class="mono">T-108</td><td>Hạ thời gian phản hồi máy chủ: 2,3 giây → dưới 0,8 giây</td><td><span class="badge b-blue">Đợt 5</span></td><td><b>Việc quan trọng nhất nhóm hạ tầng.</b> Thời gian chờ máy chủ chiếm 72,5% tổng thời gian tải trang. Có thể phải nâng cấp gói máy chủ và nâng phiên bản PHP (bản đang chạy đã hết hỗ trợ bảo mật từ 28/11/2022).</td></tr>
+      <tr><td class="mono">T-111</td><td>Giảm mã của bên thứ ba trên trang chủ</td><td><span class="badge b-blue">Đợt 5</span></td><td>979 KB mã bên thứ ba, chiếm 76% dung lượng trang chủ. Gỡ phải kiểm lại form và hệ thống đo còn chạy không.</td></tr>
+      <tr><td class="mono">T-114</td><td>Hạ độ trễ khi người dùng chạm trên điện thoại</td><td><span class="badge b-blue">Đợt 5</span></td><td>243 mili-giây, ngưỡng đạt là dưới 200. Máy tính đã đạt. Làm sau T-111 — gỡ bớt mã có thể đã đủ.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call">
+    <h4>Nút thắt phải nói thẳng</h4>
+    <p>Anh Hiếu vừa <b>duyệt</b> vừa <b>làm</b> phần kỹ thuật. Lịch anh kín thì cả bảng đứng — kể cả 23 việc rẻ ở đợt 1 vốn chạy song song được, vì 14 trong số đó là của anh.</p>
+    <p>Có <b>8</b> trong 40 việc của anh đang bị việc khác chặn, chưa bắt đầu được ngay cả khi anh rảnh.</p>
+    <p style="margin-top:10px"><b>Đề xuất:</b> nếu tách được phần kỹ thuật thuần (sửa mã, sửa khai báo, cấu hình máy chủ) sang một người khác, phần anh giữ lại chỉ còn duyệt quyết định — khoảng 10 việc thay vì 40. Đây là thứ đáng cân nhắc trước khi bắt đầu, không phải sau.</p>
+  </div>
+
+  <h3>Hai người còn lại gánh gì</h3>
+  <table>
+    <thead><tr><th style="width:16%">Ai</th><th class="num-c" style="width:11%">Số việc</th><th>Làm gì</th></tr></thead>
+    <tbody>
+      <tr><td><b>Claude</b></td><td class="num-c">30</td><td>Viết nội dung, dựng bảng, phân tích số, sửa mã lấy dữ liệu tự động. <b>Không tự đăng lên site</b> — mọi thứ đều qua Linh đăng.</td></tr>
+      <tr><td><b>Linh</b></td><td class="num-c">24</td><td>Vận hành công cụ đo, đăng bài, xin quyền truy cập, hỏi nội bộ. Không việc nào của Linh ở mức chi phí 3.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- =================== Q4 =================== -->
+<section id="q4">
+  <p class="qno">Câu 4</p>
+  <h2 class="q">Việc nào cần anh quyết chứ không phải làm</h2>
+
+  <p class="answer">Có <b>hai loại rất khác nhau</b> đang lẫn trong 40 việc của anh. Loại một là làm — có hướng dẫn từng bước, làm xong là xong. Loại hai là <b>quyết</b> — số liệu đã bày ra hết nhưng không tự trả lời được, phải có người chịu trách nhiệm chọn. Loại hai chỉ mất vài phút mỗi việc, nhưng không có nó thì bên dưới đứng hết.</p>
+
+  <h3>Quyết định pháp lý — gấp nhất</h3>
+  <div class="call">
+    <h4>Năm đường dẫn cụm tiêm filler vẫn đang công khai trên mạng</h4>
+    <p>Bốn trang thẻ (<span class="mono">/tag/tiem-filler/</span>, <span class="mono">/tag/tiem-botox/</span>, <span class="mono">/tag/tiem-prp/</span>, <span class="mono">/tag/tiem-meso/</span>) và một bài viết (<span class="mono">/tiem-meso-bi-ngua/</span>) đang trả về bình thường, ai cũng vào xem được. Đo thật ngày 21/08/2026.</p>
+    <p>Nội dung này <b>đã được gỡ vì lý do pháp lý</b> — cơ sở dạy nghề không được đào tạo thủ thuật tiêm. Nhưng vẫn còn công khai nghĩa là rủi ro tuân thủ vẫn còn nguyên. Sổ audit gốc không phát hiện được vì lần đó chỉ kiểm mẫu 30 đường dẫn đầu; đo đủ 65 mới lộ ra.</p>
+    <p><b>Cần anh quyết:</b> cho gỡ ngay, hay xem lại trước khi gỡ. Đây là việc gấp hơn cả 65 chuyển hướng, vì chuyển hướng là chuyện SEO, còn cái này là chuyện tuân thủ.</p>
+  </div>
+
+  <h3>Bảy quyết định kinh doanh — số liệu không tự trả lời được</h3>
+  <table>
+    <thead><tr><th class="mono" style="width:9%">Mã</th><th style="width:27%">Anh quyết cái gì</th><th style="width:26%">Số liệu đang có</th><th>Rủi ro nếu quyết sai</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="mono">T-59</td>
+        <td><b>Có gộp 10 trang cụm nối mi lại không</b></td>
+        <td>10 trang gần trùng nhau. Trang chính đang ở vị trí 35,3 — tức trang 4 kết quả. Từ khoá <span class="mono">học nối mi</span> có 3.007 lượt hiển thị, 0 lượt nhấp.</td>
+        <td><b>Cao nhất bảng.</b> Chuyển hướng sai là mất traffic vĩnh viễn. Đã đặt sẵn ngưỡng hoàn tác: theo dõi 8 tuần, tổng lượt nhấp cả cụm giảm quá 20% thì trả lại như cũ.</td>
+      </tr>
+      <tr>
+        <td class="mono">T-60</td>
+        <td><b>Trang nào là trang chính của cụm học spa</b></td>
+        <td>18–23 trang tranh nhau ba nhóm từ khoá <span class="mono">học spa</span>, <span class="mono">đào tạo spa</span>, <span class="mono">khóa học spa</span>.</td>
+        <td>Số liệu <b>không</b> chỉ ra được trang nào <i>nên</i> là trang chính — đó là chuyện định vị sản phẩm. Chọn sai thì gom traffic về nhầm chỗ.</td>
+      </tr>
+      <tr>
+        <td class="mono">T-61</td>
+        <td><b>Có hy sinh một bài blog đang chạy tốt để cứu trang bán không</b></td>
+        <td>Bài <span class="mono">/nen-hoc-phun-xam-o-dau/</span> đang ở vị trí 9,0 và <b>chặn chính trang bán khoá phun xăm</b> ở vị trí 23,2.</td>
+        <td>Bài blog vị trí 9,0 là tài sản thật. Đừng bỏ nó để cứu trang bán khi chưa biết trang bán có ra khách hay không.</td>
+      </tr>
+      <tr>
+        <td class="mono">T-54</td>
+        <td><b>39 trang thẻ: cho Google thấy, hay ẩn hẳn</b></td>
+        <td>Đang nửa vời — Google đọc được nhưng không khai báo trong bản đồ site. 30 lượt nhấp, 2.019 lượt hiển thị.</td>
+        <td>Số nhỏ nhưng nguyên tắc "chưa biết có ra khách thì không ẩn" không có ngoại lệ theo quy mô.</td>
+      </tr>
+      <tr>
+        <td class="mono">T-50</td>
+        <td><b>File nào thật sự là tài liệu nội bộ</b></td>
+        <td>Trong 22 file đang công khai có quyết định thành lập hội đồng thẩm định, kế hoạch tuyển sinh, thông báo học phí.</td>
+        <td>Gỡ nhầm file đang phục vụ tuyển sinh thì mất nguồn khách; để nguyên file nội bộ thì lộ thông tin.</td>
+      </tr>
+      <tr>
+        <td class="mono">T-16</td>
+        <td><b>Bốn trang nội bộ có bắt buộc công khai theo quy định giáo dục không</b></td>
+        <td><span class="mono">bao-cao-dao-tao</span>, <span class="mono">ke-hoach-tuyen-sinh</span>, <span class="mono">quy-che-quy-dinh</span>, <span class="mono">tai-chinh-thu-chi</span>.</td>
+        <td>Nếu là yêu cầu công khai của cơ quan quản lý thì ẩn đi là sai quy định. Phải hỏi trước khi động.</td>
+      </tr>
+      <tr>
+        <td class="mono">T-20</td>
+        <td><b>Timona có hội đồng chuyên môn thật để đứng tên kiểm duyệt nội dung không</b></td>
+        <td>Hiện 0/628 trang có khai báo người kiểm duyệt.</td>
+        <td>Gắn tên người không thực sự đọc bài là <b>khai báo sai</b> — rủi ro lớn hơn lợi ích. Không có người thật thì để trống.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Hai quyết định vượt ngoài phạm vi SEO</h3>
+  <table>
+    <thead><tr><th class="mono" style="width:9%">Mã</th><th style="width:30%">Việc</th><th>Số liệu, và vì sao đưa lên anh</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="mono">T-104</td>
+        <td><b>Có tăng đầu tư vào kênh mạng xã hội tự nhiên không</b></td>
+        <td>Kênh này chỉ chiếm <b>4,9%</b> số phiên truy cập nhưng tạo ra <b>24,9%</b> chuyển đổi — tỷ lệ 5,19%, cao nhất trong mọi kênh. So sánh: tìm kiếm tự nhiên có 73.007 phiên nhưng tỷ lệ chỉ 0,66%. <b>Ít traffic hơn 17 lần, hiệu suất cao hơn 8 lần.</b> Đây là phát hiện của audit SEO nhưng kết luận nằm ngoài SEO — nên đưa lên anh quyết.</td>
+      </tr>
+      <tr>
+        <td class="mono">T-90</td>
+        <td><b>Trang giới thiệu phần mềm quản lý spa để làm gì</b></td>
+        <td>5.406 lượt hiển thị, 8 lượt nhấp, vị trí 52,2 — kém nhất cụm kinh doanh. Đây là <b>sản phẩm phần mềm, không phải khoá học</b>, nên có thể đang phục vụ mục đích kinh doanh khác mà SEO không nhìn thấy.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- =================== Q5 =================== -->
+<section id="q5">
+  <p class="qno">Câu 5</p>
+  <h2 class="q">Làm xong thì đo bằng gì để biết có ăn thua</h2>
+
+  <p class="answer">Mỗi việc trong 94 việc đều đã có sẵn <b>hai cột</b>: kết quả kỳ vọng (con số nền hiện tại và con số phải đạt) và cách kiểm chứng (đo ở đâu, sau bao lâu, thấy gì là đạt). <b>Không việc nào để trống.</b> Nghĩa là mỗi việc đều tự chứng minh được, không phải tin lời.</p>
+
+  <h3>Ba mốc thời gian phải chờ — không rút ngắn được</h3>
+  <div class="nums">
+    <div class="num"><span class="v">14 ngày</span><span class="l">Sau khi sửa xong công cụ đo mới có số chuyển đổi sạch. Trước mốc đó cấm dùng số chuyển đổi để quyết bất cứ điều gì.</span><span class="src">T-03</span></div>
+    <div class="num"><span class="v">28 ngày</span><span class="l">Cửa sổ dữ liệu của Google trượt theo 28 ngày. Mọi việc về tốc độ và tỷ lệ nhấp đo sớm hơn là đọc lẫn số cũ.</span><span class="src">T-115</span></div>
+    <div class="num"><span class="v">8 tuần</span><span class="l">Với việc gộp trang — thời gian theo dõi trước khi kết luận, kèm ngưỡng hoàn tác nếu tụt quá 20%.</span><span class="src">T-59, T-60</span></div>
+  </div>
+
+  <h3>Việc có kết quả đo rõ nhất trong toàn bộ bảng</h3>
+  <div class="call ok">
+    <h4>T-99 — sửa tiêu đề và mô tả cho 38 từ khoá đáy phễu</h4>
+    <p><b>Số nền hiện tại:</b> 38 từ khoá này đang có 31.643 lượt hiển thị nhưng chỉ ra 102 lượt nhấp — tỷ lệ 0,32%. Trung bình toàn site là 1,40%.</p>
+    <p><b>Số phải đạt:</b> nếu kéo về mức trung bình site thì được khoảng 443 lượt nhấp mỗi kỳ, <b>tăng khoảng 341</b>.</p>
+    <p><b>Đo thế nào:</b> Search Console, so 28 ngày trước với 28 ngày sau, lọc đúng 38 từ khoá đó. <b>Điều kiện kèm theo:</b> vị trí trung bình không được xấu đi — nếu vị trí tụt thì tiêu đề mới đã lệch chủ đề, phải sửa lại.</p>
+    <p><b>Vì sao chắc:</b> phát hiện này được xác nhận chéo từ hai nguồn phân tích độc lập. Từ khoá đáng chú ý nhất: <span class="mono">dạy nghề chăm sóc da</span> đang ở vị trí 3,7 mà tỷ lệ nhấp chỉ 0,06%.</p>
+  </div>
+
+  <h3>Bốn quy tắc đo đã đóng đinh trong bảng</h3>
+  <ul class="plain">
+    <li><b>Không dùng điểm chấm tốc độ trong phòng thí nghiệm để phán quyết.</b> Site này chấm 0,91 điểm — gần như tuyệt đối — trong khi người dùng thật xếp loại chậm. Chênh 10,3 lần. Điểm phòng thí nghiệm chỉ dùng để chẩn đoán nguyên nhân, dữ liệu người dùng thật mới dùng để kết luận.</li>
+    <li><b>Đo chuyển hướng bằng trang đích, không bằng đường dẫn cũ.</b> Đường dẫn cũ sẽ rơi khỏi báo cáo sau khi chuyển hướng. Nếu trang đích không tăng thì nghĩa là chọn sai chủ đề, chứ không phải chuyển hướng hỏng.</li>
+    <li><b>Tách từ khoá thương hiệu ra trước khi đánh giá một trang.</b> Có 7 trên 24 trang khoá học đang có quá nửa lượt hiển thị đến từ người gõ chữ "Timona" — với những trang đó thì mọi chỉ số vị trí và tỷ lệ nhấp đều vô nghĩa nếu không tách. Quy tắc này đã <b>đảo ngược</b> một kết luận trước đó của audit.</li>
+    <li><b>Hai loại khai báo dữ liệu vẫn làm dù Google đã bỏ hiển thị đặc biệt.</b> Google đã ngừng hiển thị khối câu hỏi thường gặp (07/05/2026) và khối thông tin khoá học (giữa 2025). Vẫn làm — nhưng <b>đo bằng việc có được ChatGPT và Perplexity trích dẫn hay không</b>, không đo bằng tỷ lệ nhấp trên Google.</li>
+  </ul>
+
+  <h3>Toàn bộ 94 việc được chấm độ chắc chắn</h3>
+  <table>
+    <thead><tr><th style="width:18%">Độ chắc</th><th class="num-c" style="width:14%">Số việc</th><th>Nghĩa là</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge b-green">Mức 3</span></td><td class="num-c"><b>60</b></td><td>Số đo trực tiếp, đã được kiểm chứng chéo từ nguồn thứ hai độc lập.</td></tr>
+      <tr><td><span class="badge b-amber">Mức 2</span></td><td class="num-c"><b>32</b></td><td>Số đo trực tiếp nhưng chỉ từ một nguồn.</td></tr>
+      <tr><td><span class="badge b-red">Mức 1</span></td><td class="num-c"><b>2</b></td><td>Suy luận, chưa có số. Chỉ có hai việc, và cả hai đều đã ghi sẵn cảnh báo: một việc cần thêm dữ liệu mới quyết được, một việc nhiều khả năng không đáng làm.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- =================== Q6 =================== -->
+<section id="q6">
+  <p class="qno">Câu 6</p>
+  <h2 class="q">Bốn chỗ đang chặn dây chuyền — ai mở</h2>
+
+  <p class="answer">Cả bốn đều <b>không tốn tiền và không tốn công kỹ thuật</b>. Ba cái là xin quyền hoặc hỏi nội bộ, một cái là quyết định gỡ nội dung. Nhưng chưa mở thì <b>dòng số 1 của bảng chưa bắt đầu được</b>, và tính dây chuyền thì 8 việc phía sau cũng đứng theo.</p>
+
+  <!-- SIGNATURE -->
+  <div class="chain">
+    <p class="chain-title">Dây chuyền hiện tại</p>
+    <div class="links">
+      <div class="link">
+        <div class="bar bar-lock"></div>
+        <span class="code lock">GẤP NHẤT</span>
+        <span class="nm">5 đường dẫn filler còn công khai</span>
+        <span class="dt">Anh Hiếu quyết · Linh gỡ<br><b>Chặn:</b> không chặn việc nào, nhưng là rủi ro tuân thủ đang chạy mỗi ngày.</span>
+      </div>
+      <div class="link">
+        <div class="bar bar-lock"></div>
+        <span class="code lock">G-03</span>
+        <span class="nm">Quyền vào Google Tag Manager</span>
+        <span class="dt">Linh xin quyền<br><b>Chặn:</b> T-01 → T-02 → T-03 → số khách theo từng trang → T-87, T-90, T-56, T-54.</span>
+      </div>
+      <div class="link">
+        <div class="bar bar-lock"></div>
+        <span class="code lock">G-24</span>
+        <span class="nm">Khoá Master Thẩm Mỹ còn tuyển sinh không</span>
+        <span class="dt">Linh hỏi nội bộ<br><b>Chặn:</b> T-87, chuỗi chuyển hướng của khoá cũ, và con số nền "21 khoá" hay "20 khoá".</span>
+      </div>
+      <div class="link">
+        <div class="bar bar-wait"></div>
+        <span class="code wait">G-22</span>
+        <span class="nm">Hai khoá quản lý spa khác nhau ở đâu</span>
+        <span class="dt">Linh hỏi bộ phận đào tạo<br><b>Chặn:</b> chốt cuối T-85 và T-86.</span>
+      </div>
+      <div class="link">
+        <div class="bar bar-go"></div>
+        <span class="code go">SAU ĐÓ</span>
+        <span class="nm">Đợt 0 chạy được</span>
+        <span class="dt">10 việc mở khoá dữ liệu, rồi 84 việc còn lại theo sau.<br>Đợt 1 (23 việc rẻ) chạy song song, không phải chờ.</span>
+      </div>
+    </div>
+    <p class="chain-note"><b>Đọc thế nào:</b> ba thanh đỏ là ba chỗ đang khoá cứng. Thanh xám là chỗ khoá một nửa — đã biết hai khoá quản lý spa là <b>hai sản phẩm khác nhau</b>, nhưng chưa biết khác nhau ở chỗ nào, nên chỉ làm được bản nháp.</p>
+  </div>
+
+  <h3>Chi tiết từng chỗ</h3>
+  <table>
+    <thead><tr><th style="width:23%">Chỗ khoá</th><th style="width:15%">Ai mở</th><th>Vì sao chưa mở được, và mở ra thì được gì</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>5 đường dẫn filler còn công khai</b><br><span class="badge b-red">Pháp lý</span></td>
+        <td>Anh Hiếu duyệt<br>Linh thực hiện</td>
+        <td>Không có gì cản trở kỹ thuật — chỉ cần một câu đồng ý. Đây là việc <b>gấp hơn cả 65 chuyển hướng</b>, vì chuyển hướng là chuyện thứ hạng còn cái này là chuyện tuân thủ. Xoá thẻ trong WordPress là bốn đường dẫn thẻ tự mất.</td>
+      </tr>
+      <tr>
+        <td><b>G-03 — quyền Google Tag Manager</b><br><span class="badge b-red">Chặn dòng #1</span></td>
+        <td>Linh xin quyền</td>
+        <td>Không vào được công cụ quản lý thẻ đo thì không tìm được thẻ nào đang bắn 118.286 sự kiện rác, không gộp được ba tên sự kiện form về một, và <b>không bao giờ biết trang nào ra khách</b>. Mà "trang nào ra khách" lại là điều kiện cho nguyên tắc cứng "không ẩn trang khi chưa biết nó có ra khách" — nghĩa là bốn việc quyết định lớn ở đợt 4 cũng đứng theo.</td>
+      </tr>
+      <tr>
+        <td><b>G-24 — khoá Master còn tuyển sinh không</b></td>
+        <td>Linh hỏi nội bộ</td>
+        <td>Đã biết việc ẩn khoá này khỏi trang danh mục là <b>cố ý</b>. Nhưng chưa biết còn bán hay không. Ba tình huống dẫn tới ba cách xử lý khác nhau: còn bán thì giữ nguyên và thêm liên kết nội bộ; ngừng bán thì phải đổi đích chuyển hướng của khoá cũ sang khoá đang bán gần chủ đề nhất; tạm dừng thì giữ nguyên và ghi lại rà sau. Câu trả lời còn quyết định con số nền của cả dự án là <b>21 khoá hay 20 khoá</b>.</td>
+      </tr>
+      <tr>
+        <td><b>G-22 — hai khoá quản lý spa</b></td>
+        <td>Linh hỏi bộ phận đào tạo</td>
+        <td>Đã xác nhận là hai sản phẩm riêng, <b>không gộp</b>. Vấn đề: hai trang đang tranh nhau <b>toàn bộ</b> từ khoá thương mại của cụm, và kết quả là cả hai cùng thua. <span class="mono">khóa học quản lý spa</span> 676 lượt hiển thị ra 2 lượt nhấp; <span class="mono">học quản lý spa</span> 385 ra 0; <span class="mono">khóa học làm chủ spa</span> 182 ra 0. Cần một câu mô tả khác biệt thực chất: học viên mỗi khoá là ai, học xong làm được gì.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="call info">
+    <h4>Xin anh ba việc để bắt đầu</h4>
+    <ul>
+      <li><b>Một câu đồng ý</b> cho việc gỡ 5 đường dẫn cụm filler còn công khai.</li>
+      <li><b>Một con số giờ công thật</b> cho 40 việc của anh — hiện chỉ có thang 1-2-3 do Claude tự chấm, chưa lên lịch được.</li>
+      <li><b>Một quyết định về nút thắt:</b> anh giữ cả 40 việc, hay tách phần kỹ thuật thuần cho người khác và anh chỉ giữ khoảng 10 việc phải quyết.</li>
+    </ul>
+    <p style="margin-top:10px">Ba lỗ hổng dữ liệu còn lại đều do Linh mở, không cần anh. Mở xong là đợt 0 và đợt 1 chạy được — <b>33 việc</b>, trong đó không việc nào có rủi ro làm hỏng gì.</p>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p><b>Nguồn số liệu.</b> Mọi con số trong tài liệu này được trích trực tiếp từ sổ kết luận audit (95 phát hiện, mã F-01 đến F-95), bảng thi công 94 việc, và bảng đo trạng thái 65 đường dẫn ngày 21/08/2026. Số nào đã bị đính chính thì lấy theo bản đính chính, không lấy theo bản gốc — có 20 việc thuộc diện này.</p>
+    <p style="margin-top:12px"><b>Chỗ chưa biết, nói rõ là chưa biết.</b> Nguyên nhân chính của cú sụt traffic tháng 02/2026 chưa xác định được — cần dữ liệu theo tháng mà hiện chưa có. Giờ công cho 40 việc chưa quy đổi được. Số khách theo từng trang chưa có, nên chưa việc nào đề xuất xoá hay ẩn trang.</p>
+    <p class="mono" style="margin-top:16px">Dựng 24/08/2026 · Trọng tâm khoá học cũ · Cụm mẹ &amp; bé không nằm trong phạm vi audit này<br>Kiểm chứng: 94 việc · 0 vi phạm thứ tự phụ thuộc · Anh Hiếu 40 / Claude 30 / Linh 24 · bảng 301 đủ 65 dòng, 844 lượt nhấp, 56.189 lượt hiển thị, chênh 0 so với sổ audit</p>
+  </div>
+</footer>
+
+</body>
+</html>
